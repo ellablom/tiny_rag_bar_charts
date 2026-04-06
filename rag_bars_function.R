@@ -1,13 +1,13 @@
 # Function to make individual bar charts
 rag_bars <- function(data) {
   # Make graph
-  ggplot(level3_data, aes(x = rag, y = count, fill = rag), group = 1) +
+  ggplot(data, aes(x = rag, y = count, fill = rag), group = 1) +
     geom_bar(stat = "identity") +
     # Set colours 
     scale_fill_manual(values = c("red" = "#D2222D",
                                        "amber" = "#FFBF00",
                                        "green" = "#238823")) +
-                                         # Remove unwanted elements
+    # Remove unwanted elements
     theme(legend.position = "none", 
           strip.text.x = element_blank(),
           panel.grid = element_blank(),
@@ -28,10 +28,8 @@ rag_bars <- function(data) {
 
 # Function to make individual bar charts with added totals annotation
 rag_bars_ind <- function(data) {
-  # Subset data by level 3
-  level3_data <- subset(data, level3 == i)
   # Calculate total values
-  total_values <- sum(level3_data$count)
+  total_values <- sum(data$count)
   # Make plots
   rag_bars(data) +
     # Add annotation
