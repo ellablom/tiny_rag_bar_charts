@@ -45,12 +45,14 @@ rag_bars_ind <- function(data) {
 }
 
 # Function to make a row of faceted bar charts
-rag_bars_row <- function(data){
+rag_bars_row <- function(comp_name, comp_data){
   comp_num = n_distinct(comp_data$sub_component)
-  rag_bars(data) +
+  rag_bars(comp_data) +
     theme(strip.text.x = element_text(size = 5)
           ) +
     # Facet wrap
     facet_wrap(~sub_component, ncol = comp_num, labeller = label_wrap_gen(width = 10)) +
-    force_panelsizes(total_width = unit(comp_num * 1.5, "cm"), total_height = unit(2, "cm"))
+    # Include system name
+    ylab(line_break(comp_name)) +
+    theme(axis.title.y = element_text(size = 7, face = "bold"))
 }
